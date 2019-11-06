@@ -1,0 +1,198 @@
+<div class="container py-5">
+    <!-- list users -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <button type="button" class="btn btn-success float-right" style="margin-left: 10px;" (click)="newUser = {}">Nuevo usuario</button>
+            <button type="button" class="btn btn-primary float-right" (click)="getUsers()">Reload users</button>
+            Usuarios
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr class="bg-success">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.surname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><button class="btn btn-info" (click)="getUser(user.id)">Details</button></td>
+                </tr>
+                <tr *ngIf="users.length == 0">
+                    <td colspan="7" class="text-center">Loading</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- list user -->
+
+    <!-- new user -->
+    <div class="card mb-3" *ngIf="newUser">
+        <div class="card-header">
+            <button type="button" class="btn btn-default float-right" (click)="newUser = null">Close</button>
+            Create User
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" id="name" [(ngModel)]="newUser.name" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="surname">Apellido</label>
+                        <input type="text" name="surname" id="surname" [(ngModel)]="newUser.surname" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" [(ngModel)]="newUser.email" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="celphone">Celular</label>
+                        <input type="text" name="celphone" id="celphone" [(ngModel)]="newUser.celphone" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="art">Arte</label>
+                        <input type="text" name="art" id="art" [(ngModel)]="newUser.art" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="movie">Pelicula</label>
+                        <input type="text" name="movie" id="name" [(ngModel)]="newUser.movie" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="music">Música</label>
+                        <input type="text" name="music" id="music" [(ngModel)]="newUser.music" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" [(ngModel)]="newUser.password" class="form-control">
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" (click)="createUser()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- new user -->
+
+    <!-- show user -->
+    <div class="card" *ngIf="user">
+        <div class="card-header card-title">
+            <button type="button" class="btn btn-primary float-right" (click)="user = null">Close</button>
+            Usuario: {{ user.name }} - {{ user.id }}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Nombre:</strong> {{ user.name }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Apellido:</strong> {{ user.surname }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Email:</strong> {{ user.email }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Celular:</strong> {{ user.celphone }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Dirección:</strong> {{ user.address }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Arte:</strong> {{ user.art }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Pelicula:</strong> {{ user.movie }}
+                </div>
+                <div class="col-md-6">
+                    <strong>Música:</strong> {{ user.music }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- edit user -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ user.name }}" [(ngModel)]="user.name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="surname">Apellido</label>
+                        <input type="text" name="surname" id="surname" class="form-control" value="{{ user.surname }}" [(ngModel)]="user.surname">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}" [(ngModel)]="user.email">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="celphone">Celular</label>
+                        <input type="text" name="celphone" id="celphone" class="form-control" value="{{ user.celphone }}" [(ngModel)]="user.celphone">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="art">Arte</label>
+                        <input type="text" name="art" id="art" class="form-control" value="{{ user.art }}" [(ngModel)]="user.art">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="movie">Pelicula</label>
+                        <input type="text" name="movie" id="name" class="form-control" value="{{ user.movie }}" [(ngModel)]="user.movie">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="music">Música</label>
+                        <input type="text" name="music" id="music" class="form-control" value="{{ user.music }}" [(ngModel)]="user.music">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="addredd">Dirección</label>
+                        <input type="text" name="address" id="address" class="form-control" value="{{ user.address }}" [(ngModel)]="user.address">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" value="{{ user.password }}" [(ngModel)]="user.password">
+                    </div>
+                </div>
+                <!-- edit user -->
+            </div>
+            <hr>
+            <button class="btn btn-success float-left" (click)="updateUser(user)">Update</button>
+            <button class="btn btn-danger float-right" (click)="deleteUser(user.id)">Delete</button>
+        </div>
+    </div>
+    <!-- show user -->
+</div>
